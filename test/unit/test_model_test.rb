@@ -5,7 +5,7 @@ class TestModelTest < ActiveSupport::TestCase
      assert true
   end
 
-  test "fail on purpose" do
-     assert false
+  test "and now succeed" do
+     assert true
   end
 end
