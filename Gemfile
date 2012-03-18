@@ -9,6 +9,9 @@ gem 'sqlite3'
 
 group :test do
   gem 'metrical'
+  gem 'fattr'
+  gem 'arrayfields'
+  gem 'map'
 end
 
 # Gems used only for assets and not required
