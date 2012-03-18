@@ -9,7 +9,6 @@ gem 'sqlite3'
 
 group :test do
   gem 'simplecov'
-  gem 'simplecov-rcov-text'
   gem 'metric_fu'
   gem 'fattr'
   gem 'arrayfields'

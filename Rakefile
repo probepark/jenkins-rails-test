@@ -6,8 +6,7 @@ require File.expand_path('../config/application', __FILE__)
 
 require 'metric_fu'
 MetricFu::Configuration.run do |config|
-  config.rcov[:rcov_opts] << "-Itest" # Needed to find test_helper
-  config.rcov[:external] = 'coverage/rcov/rcov.txt'
+  config.metrics -= [ :rcov ]
 end
 
 JenkinsRailsTest::Application.load_tasks

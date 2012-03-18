@@ -1,6 +1,4 @@
 require 'simplecov'
-require 'simplecov-rcov-text'
-SimpleCov.formatter = SimpleCov::Formatter::RcovTextFormatter
 SimpleCov.start 'rails'
 
 ENV["RAILS_ENV"] = "test"
