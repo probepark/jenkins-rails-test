@@ -8,7 +8,9 @@ gem 'rails', '3.2.2'
 gem 'sqlite3'
 
 group :test do
-  gem 'metrical'
+  gem 'simplecov'
+  gem 'simplecov-rcov-text'
+  gem 'metric_fu'
   gem 'fattr'
   gem 'arrayfields'
   gem 'map'
