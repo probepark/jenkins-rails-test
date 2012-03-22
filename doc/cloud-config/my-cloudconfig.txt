@@ -1,0 +1,59 @@
+#cloud-config
+
+apt_update: true
+apt_upgrade: false
+apt_mirror: http://mirror.aarnet.edu.au/pub/ubuntu/archive/
+
+packages:
+ - language-pack-en
+ - build-essential
+ - openssl
+ - libreadline6
+ - libreadline6-dev
+ - curl
+ - git-core
+ - zlib1g
+ - zlib1g-dev
+ - libssl-dev
+ - libyaml-dev
+ - libsqlite3-0
+ - libsqlite3-dev
+ - sqlite3
+ - libxml2-dev
+ - libxslt-dev
+ - autoconf
+ - libc6-dev
+ - ncurses-dev
+ - automake
+ - libtool
+ - bison
+ - subversion
+ - libmysqlclient-dev
+ - libcurl4-openssl-dev
+ - libpcre3-dev
+ - s3cmd
+
+ssh_authorized_keys:
+  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC/HIW63WnYx1vfvOfzGLzAP93nercu/tgvq5lZlpNoRa+bnKgHTsS9ImI6VP3vDrypS10is5lwzXc7k8glf3VpvJ6CfTmlkmRdVz1Yxs4Xx6LjEvyQOd98veCuxkdDjEE8WCO3zNaEafNqjMYZ015Tj2GPrB6imevySqG1yCsfXghkneUw20RCuIyBWlnbJqEXkZI3tSauh/ndqksahEh4P0fwRJDQMD2Hrn0ZnbvEOpa3YfyAKIhOxSnx5vG8aWW3TaCrTIp2xuuHAy/ZBwcg0RtpEfdcJRTnUabZWDw5Q5Gt8s+khZoeMMDAbmuES0z9PsbZlV5riGKNh8zKQOqh greg@gtgross.com
+
+cloud_config_modules:
+ - set_passwords
+ - ssh-import-id
+ - ssh
+ - timezone
+ - grub-dpkg
+ - [ apt-update-upgrade, always ]
+ - updates-check
+ - disable-ec2-metadata
+
+# set the timezone
+timezone: Australia/Melbourne
+
+# set the correct local
+locale: en_AU.UTF-8
+
+# fix some broken permissons
+syslog_fix_perms: syslog:root
+
+# disable password auth
+ssh_pwauth: False

@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# install rvm, rails, passenger, nginx
+echo "Installing jenkins-rails-test"
+echo `pwd`
+curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer -o /home/ubuntu/rvm-installer
+bash /home/ubuntu/rvm-installer
+PATH=$PATH:/usr/local/rvm/bin
+source /usr/local/rvm/scripts/rvm
+echo "Installing ruby 1.9.3"
+rvm install 1.9.3
+rvm use 1.9.3
+rvm gemset create 'jenkins-rails-test'
+rvm use 1.9.3@jenkins-rails-test
+gem install rails --no-ri --no-rdoc
+echo "Installing passenger"
+gem install passenger --no-ri --no-rdoc
+echo "Installing nginx"
+rvmsudo passenger-install-nginx-module --auto --auto-download --prefix /etc/nginx
+
+# prepare for deployments
+mkdir -p /u/apps/jenkins-rails-test/releases
+mkdir -p /u/apps/jenkins-rails-test/shared
+chown -R ubuntu:ubuntu /u/apps/jenkins-rails-test
+
+# get code
+git clone git@github.com:gregory144/jenkins-rails-test.git /u/apps/jenkins-rails-test/releases/initial-deploy
+ln -s /u/apps/jenkins-rails-test/releases/initial-deploy /u/apps/jenkins-rails-test/current
+cd /u/apps/jenkins-rails-test/current && bundle install
+cd /u/apps/jenkins-rails-test/current && rake db:migrate
+
+#deploy nginx configuration
+
